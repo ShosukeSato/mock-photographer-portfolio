@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     args: [title, subtitle || "", year || "", image_url || "", sortOrder],
   });
 
-  const work = await db.execute({ sql: "SELECT * FROM works WHERE id = ?", args: [result.lastInsertRowid] });
+  const work = await db.execute({ sql: "SELECT * FROM works WHERE id = ?", args: [Number(result.lastInsertRowid)] });
   return NextResponse.json(work.rows[0], { status: 201 });
 }
 

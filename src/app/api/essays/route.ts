@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     args: [title, excerpt || "", content || "", date || new Date().toISOString().split("T")[0]],
   });
 
-  const essay = await db.execute({ sql: "SELECT * FROM essays WHERE id = ?", args: [result.lastInsertRowid] });
+  const essay = await db.execute({ sql: "SELECT * FROM essays WHERE id = ?", args: [Number(result.lastInsertRowid)] });
   return NextResponse.json(essay.rows[0], { status: 201 });
 }
 
